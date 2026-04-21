@@ -1,7 +1,17 @@
+from flask import Flask, render_template, request
+import requests
+
+app = Flask(__name__)
+
+api_url = "https://colbert-salary-api-cgawbyc6fah3b0g8.eastus-01.azurewebsites.net/predict"
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        # build JSON EXACTLY how API wants it
         data = {
             "age": int(request.form["age"]),
             "gender": int(request.form["gender"]),
@@ -11,15 +21,7 @@ def predict():
             "title": int(request.form["title"])
         }
 
-        # 🔥 FORCE correct headers
-        response = requests.post(
-            api_url,
-            json=data,
-            headers={"Content-Type": "application/json"}
-        )
-
-        print("SENT:", data)
-        print("RESPONSE:", response.text)
+        response = requests.post(api_url, json=data)
 
         result = response.json()
 
@@ -27,3 +29,6 @@ def predict():
 
     except Exception as e:
         return render_template("index.html", prediction=f"Error: {e}")
+
+if __name__ == "__main__":
+    app.run()

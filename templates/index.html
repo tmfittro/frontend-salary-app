@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Salary Prediction</h2>
+
+<form action="/predict" method="POST">
+
+    <!-- AGE -->
+    <div class="mb-3">
+        <label class="form-label">Age</label>
+        <select name="age" class="form-control" required>
+            <option value="">Choose age</option>
+            <option value="7">7</option>
+        </select>
+    </div>
+
+    <!-- GENDER -->
+    <div class="mb-3">
+        <label class="form-label">Gender</label>
+        <select name="gender" class="form-control" required>
+            <option value="">Choose gender</option>
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+        </select>
+    </div>
+
+    <!-- COUNTRY -->
+    <div class="mb-3">
+        <label class="form-label">Country</label>
+        <select name="country" class="form-control" required>
+            <option value="">Choose country</option>
+            <option value="55">USA</option>
+        </select>
+    </div>
+
+    <!-- DEGREE -->
+    <div class="mb-3">
+        <label class="form-label">Highest Degree</label>
+        <select name="highest_deg" class="form-control" required>
+            <option value="">Choose degree</option>
+            <option value="3">Bachelor's</option>
+        </select>
+    </div>
+
+    <!-- CODING EXPERIENCE -->
+    <div class="mb-3">
+        <label class="form-label">Coding Experience</label>
+        <select name="coding_exp" class="form-control" required>
+            <option value="">Choose experience</option>
+            <option value="4">4 years</option>
+        </select>
+    </div>
+
+    <!-- JOB TITLE -->
+    <div class="mb-3">
+        <label class="form-label">Job Title</label>
+        <select name="title" class="form-control" required>
+            <option value="">Choose title</option>
+            <option value="13">Data Scientist</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Predict</button>
+
+</form>
+
+{% if prediction %}
+    <div class="alert alert-success mt-4">
+        Predicted Salary: {{ prediction }}
+    </div>
+{% endif %}
+
+{% endblock %}

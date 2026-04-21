@@ -1,16 +1,68 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends "base.html" %}
 
-<h2>Salary Predictor</h2>
+{% block content %}
+
+<h1>Salary Predictor</h1>
 
 <form action="/predict" method="POST">
-    <button type="submit">Predict Salary</button>
+
+<div class="mb-3">
+<label>Age</label>
+<select name="age" class="form-control" required>
+<option value="">Choose age</option>
+<option value="7">7</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label>Gender</label>
+<select name="gender" class="form-control" required>
+<option value="">Choose gender</option>
+<option value="0">Male</option>
+<option value="1">Female</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label>Country</label>
+<select name="country" class="form-control" required>
+<option value="">Choose country</option>
+<option value="55">USA</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label>Highest Degree</label>
+<select name="highest_deg" class="form-control" required>
+<option value="">Choose degree</option>
+<option value="3">Bachelor's</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label>Coding Experience</label>
+<select name="coding_exp" class="form-control" required>
+<option value="">Choose experience</option>
+<option value="4">4 years</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label>Job Title</label>
+<select name="title" class="form-control" required>
+<option value="">Choose title</option>
+<option value="13">Data Scientist</option>
+</select>
+</div>
+
+<button class="btn btn-primary">Predict</button>
+
 </form>
 
 {% if prediction %}
-<p>Result: {{ prediction }}</p>
+<div class="alert alert-success mt-3">
+Predicted Salary: {{ prediction }}
+</div>
 {% endif %}
 
-</body>
-</html>
+{% endblock %}

@@ -12,22 +12,22 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     data = {
-        "age": 7,
-        "gender": 0,
-        "country": 55,
-        "highest_deg": 3,
-        "coding_exp": 4,
-        "title": 13
+        "age": int(request.form["age"]),
+        "gender": int(request.form["gender"]),
+        "country": int(request.form["country"]),
+        "highest_deg": int(request.form["highest_deg"]),
+        "coding_exp": int(request.form["coding_exp"]),
+        "title": int(request.form["title"])
     }
 
     try:
-        r = requests.post(api_url, json=data)
-        result = r.json()
+        response = requests.post(api_url, json=data)
+        result = response.json()
         prediction = result.get("prediction") or result.get("error")
     except:
-        prediction = "API connection error"
+        prediction = "API error"
 
     return render_template("index.html", prediction=prediction)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5002)
+    app.run(debug=True)
